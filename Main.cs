@@ -232,18 +232,23 @@ namespace tnki_accesslog_fetcher
 
         private void LogMessage(string message)
         {
+            if (LogListBox.InvokeRequired)
+            {
+                LogListBox.Invoke(new Action(() => LogMessage(message)));
+                return;
+            }
+
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string logMessage = $"{timestamp} - {message}";
-
-            File.AppendAllText(outputLogFile, logMessage + Environment.NewLine);
 
             LogListBox.Items.Add($"{logMessage}");
 
             while (LogListBox.Items.Count > maxLogItems)
             {
-                LogListBox.Items.RemoveAt(0);
-                File.WriteAllLines(outputLogFile, LogListBox.Items.Cast<string>());
+                LogListBox.Items.RemoveAt(0);                
             }
+
+            File.WriteAllLines(outputLogFile, LogListBox.Items.Cast<string>());
 
             LogListBox.TopIndex = LogListBox.Items.Count - 1;
         }
