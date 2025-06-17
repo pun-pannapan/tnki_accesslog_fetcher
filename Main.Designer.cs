@@ -36,7 +36,7 @@
             // 
             // btn_pullnow
             // 
-            btn_pullnow.Location = new Point(53, 38);
+            btn_pullnow.Location = new Point(200, 27);
             btn_pullnow.Name = "btn_pullnow";
             btn_pullnow.Size = new Size(133, 34);
             btn_pullnow.TabIndex = 0;
@@ -46,7 +46,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(216, 38);
+            button1.Location = new Point(374, 27);
             button1.Name = "button1";
             button1.Size = new Size(133, 34);
             button1.TabIndex = 1;
@@ -60,14 +60,14 @@
             LogListBox.ItemHeight = 25;
             LogListBox.Location = new Point(12, 90);
             LogListBox.Name = "LogListBox";
-            LogListBox.Size = new Size(387, 154);
+            LogListBox.Size = new Size(704, 154);
             LogListBox.TabIndex = 2;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(411, 253);
+            ClientSize = new Size(728, 253);
             Controls.Add(LogListBox);
             Controls.Add(button1);
             Controls.Add(btn_pullnow);
