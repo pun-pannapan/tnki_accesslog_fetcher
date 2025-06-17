@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             btn_pullnow = new Button();
             button1 = new Button();
+            LogListBox = new ListBox();
             SuspendLayout();
             // 
             // btn_pullnow
@@ -53,11 +54,21 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += btn_schedulepull_Click;
             // 
+            // LogListBox
+            // 
+            LogListBox.FormattingEnabled = true;
+            LogListBox.ItemHeight = 25;
+            LogListBox.Location = new Point(12, 90);
+            LogListBox.Name = "LogListBox";
+            LogListBox.Size = new Size(387, 154);
+            LogListBox.TabIndex = 2;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(411, 110);
+            ClientSize = new Size(411, 253);
+            Controls.Add(LogListBox);
             Controls.Add(button1);
             Controls.Add(btn_pullnow);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -70,5 +81,6 @@
 
         private Button btn_pullnow;
         private Button button1;
+        private ListBox LogListBox;
     }
 }

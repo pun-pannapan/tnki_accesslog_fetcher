@@ -1,10 +1,7 @@
-using RestSharp;
 using System.Configuration;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Net.Sockets;
-using System.Security.Cryptography;
 using System.Text;
 using Timer = System.Timers.Timer;
 
@@ -22,8 +19,9 @@ namespace tnki_accesslog_fetcher
         private string browserToken;
         private int intervalMinutes;
         private string outputPath;
-        private string outputSessionFile;
+        private string outputLogFile;
         private NotifyIcon trayIcon;
+        private readonly int maxLogItems = 100;
 
         public Main()
         {
@@ -69,8 +67,8 @@ namespace tnki_accesslog_fetcher
                 ? minutes
                 : throw new InvalidOperationException("Configuration 'intervalMinutes' is missing, null, or not a valid integer.");
             outputPath = ConfigurationManager.AppSettings["outputPath"] ?? throw new InvalidOperationException("Configuration 'outputPath' is missing or null.");
-            outputSessionFile = ConfigurationManager.AppSettings["outputSessionFile"] ?? throw new InvalidOperationException("Configuration 'outputSessionFile' is missing or null.");
-            outputSessionFile = string.Format("{0}\\{1}", outputPath, outputSessionFile);
+            outputLogFile = ConfigurationManager.AppSettings["outputLogFile"] ?? throw new InvalidOperationException("Configuration 'outputLogFile' is missing or null.");
+            outputLogFile = string.Format("{0}\\{1}", outputPath, outputLogFile);
         }
         private void InitTimer()
         {
