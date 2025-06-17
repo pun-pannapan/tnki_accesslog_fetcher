@@ -79,12 +79,11 @@ namespace tnki_accesslog_fetcher
         private async void btn_fetchnow_Click(object sender, EventArgs e)
         {
             await CallLoginApiTwoTime();
-            MessageBox.Show($"Fetch access log complete");
         }
         private void btn_schedulepull_Click(object sender, EventArgs e)
         {
             schedulerTimer.Start();
-            MessageBox.Show($"Scheduler started. Interval: {intervalMinutes} minutes");
+            LogMessage($"Scheduler started with interval: {intervalMinutes} minutes");
         }
         private async Task CallLoginApiTwoTime()
         {
@@ -153,7 +152,7 @@ namespace tnki_accesslog_fetcher
                 content.Add(new StringContent(queryConditions), "queryConditions");
                 content.Add(new StringContent(browserToken), "browserToken");
 
-                string filename = $"All+Transactions_{DateTime.Now:yyyyMMddHHmmss}.csv";
+                string filename = $"All Transactions_{DateTime.Now:yyyyMM}.csv";
                 string fullOutputPath = Path.Combine(outputPath, filename);
 
                 client.DefaultRequestHeaders.Clear();
@@ -184,10 +183,12 @@ namespace tnki_accesslog_fetcher
                 string stdout = await process.StandardOutput.ReadToEndAsync();
                 string stderr = await process.StandardError.ReadToEndAsync();
                 process.WaitForExit();
+
+                LogMessage($"HR Ranger Fetch data complete : {filename}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                LogMessage("Error: " + ex.Message);
             }
         }
         private async Task<string> BuildCurl(HttpRequestMessage request, string outputPath)
@@ -227,6 +228,24 @@ namespace tnki_accesslog_fetcher
             curl.Append($" --output \"{outputPath}\"");
 
             return curl.ToString();
+        }
+
+        private void LogMessage(string message)
+        {
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string logMessage = $"{timestamp} - {message}";
+
+            File.AppendAllText(outputLogFile, logMessage + Environment.NewLine);
+
+            LogListBox.Items.Add($"{logMessage}");
+
+            while (LogListBox.Items.Count > maxLogItems)
+            {
+                LogListBox.Items.RemoveAt(0);
+                File.WriteAllLines(outputLogFile, LogListBox.Items.Cast<string>());
+            }
+
+            LogListBox.TopIndex = LogListBox.Items.Count - 1;
         }
     }
 }
