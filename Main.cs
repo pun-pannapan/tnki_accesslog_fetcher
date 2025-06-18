@@ -83,6 +83,7 @@ namespace tnki_accesslog_fetcher
         private void btn_schedulepull_Click(object sender, EventArgs e)
         {
             schedulerTimer.Start();
+            btn_schedulepull.Enabled = false;
             LogMessage($"Scheduler started with interval: {intervalMinutes} minutes");
         }
         private async Task CallLoginApiTwoTime()

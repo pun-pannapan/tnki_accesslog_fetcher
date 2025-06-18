@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             btn_pullnow = new Button();
-            button1 = new Button();
+            btn_schedulepull = new Button();
             LogListBox = new ListBox();
             SuspendLayout();
             // 
@@ -44,15 +44,15 @@
             btn_pullnow.UseVisualStyleBackColor = true;
             btn_pullnow.Click += btn_fetchnow_Click;
             // 
-            // button1
+            // btn_schedulepull
             // 
-            button1.Location = new Point(374, 27);
-            button1.Name = "button1";
-            button1.Size = new Size(133, 34);
-            button1.TabIndex = 1;
-            button1.Text = "SchedulePull";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += btn_schedulepull_Click;
+            btn_schedulepull.Location = new Point(374, 27);
+            btn_schedulepull.Name = "btn_schedulepull";
+            btn_schedulepull.Size = new Size(133, 34);
+            btn_schedulepull.TabIndex = 1;
+            btn_schedulepull.Text = "SchedulePull";
+            btn_schedulepull.UseVisualStyleBackColor = true;
+            btn_schedulepull.Click += btn_schedulepull_Click;
             // 
             // LogListBox
             // 
@@ -69,7 +69,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(728, 253);
             Controls.Add(LogListBox);
-            Controls.Add(button1);
+            Controls.Add(btn_schedulepull);
             Controls.Add(btn_pullnow);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
@@ -80,7 +80,7 @@
         #endregion
 
         private Button btn_pullnow;
-        private Button button1;
+        private Button btn_schedulepull;
         private ListBox LogListBox;
     }
 }
